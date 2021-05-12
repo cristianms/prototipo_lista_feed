@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prototipo_lista_feed/pages/item_eemplo.dart';
 
 class PageViewPage extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class _PageViewPageState extends State<PageViewPage> {
       appBar: AppBar(
         title: Text('PageView'),
       ),
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Padding(
@@ -48,58 +50,25 @@ class _PageViewPageState extends State<PageViewPage> {
 
 class Page1 extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => ContainerTeste('Tenis Nike Model 1');
+  Widget build(BuildContext context) => ItemExemplo('Tenis Nike Model 1');
 }
 
 class Page2 extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => ContainerTeste('Tenis Nike Model 2');
+  Widget build(BuildContext context) => ItemExemplo('Tenis Nike Model 2');
 }
 
 class Page3 extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => ContainerTeste('Tenis Nike Model 3');
+  Widget build(BuildContext context) => ItemExemplo('Tenis Nike Model 3');
 }
 
 class Page4 extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => ContainerTeste('Tenis Nike Model 4');
+  Widget build(BuildContext context) => ItemExemplo('Tenis Nike Model 4');
 }
 
 class Page5 extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => ContainerTeste('Tenis Nike Model 5');
-}
-
-class ContainerTeste extends StatelessWidget {
-  final String label;
-  ContainerTeste(this.label);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          flex: 3,
-          child: Image.network(
-              'https://cdn.dentalspeed.com/produtos/550/tenis-flynit-cinza-em-croche-n-34-comfortflex-13421.png'),
-        ),
-        Expanded(
-          flex: 1,
-          child: Container(
-            child: Column(
-              children: [
-                Divider(),
-                Text(
-                  label,
-                  style: TextStyle(fontSize: 25),
-                ),
-                Text('R\$999,99', style: TextStyle(fontSize: 15)),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => ItemExemplo('Tenis Nike Model 5');
 }

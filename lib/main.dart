@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:prototipo_lista_feed/pages/listview_builder_page.dart';
-import 'package:prototipo_lista_feed/pages/pageview_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,8 +14,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: ListViewBuilderPage(),
-      home: PageViewPage(),
+      home: ListViewBuilderPage(),
+      // home: PageViewPage(),
     );
   }
 }

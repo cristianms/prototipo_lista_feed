@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prototipo_lista_feed/pages/item_exemplo.dart';
 
 class ListViewBuilderPage extends StatefulWidget {
   @override
@@ -8,87 +9,62 @@ class ListViewBuilderPage extends StatefulWidget {
 class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
   final ScrollController controller = ScrollController();
 
-  @override
-  void initState() {
-    super.initState();
-    // controller.addListener(_listenScrolling);
-  }
-
-  // void _listenScrolling() {
-  //   if (controller.position.atEdge) {
-  //     print('at edge');
-  //   }
-  // }
+  var scrollTypeRunner = true;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Scroll Controller'),
-      ),
-      body: GestureDetector(
-        // onVerticalDragDown: (dragdownDetails) {
-        //   print('drag down');
-        // },
-        // onVerticalDragUpdate: (details) {
-        //   int sensivity = 8;
-        //   if (details.delta.dy > sensivity) {
-        //     print('swipe down');
-        //   } else if (details.delta.dy < -sensivity) {
-        //     print('swipe up');
-        //   }
-        // },
-        onPanUpdate: (details) {
-          int sensivity = 8;
-          if (details.delta.dy > sensivity) {
-            print('swipe down');
-          } else if (details.delta.dy < -sensivity) {
-            print('swipe up');
-          }
-        },
-        child: ListView.builder(
-          controller: controller,
-          itemCount: 50,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border.all(width: 1),
-                color: Colors.black38,
-              ),
-              child: Center(
-                child: Text(
-                  'item $index',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            );
+    // Altura da tela menos o appbar e menos o TextFormField
+    final heightItem = MediaQuery.of(context).size.height - 155;
+    AppBar appBar = AppBar(
+      title: Text('Scroll Controller'),
+      actions: [
+        Switch(
+          activeColor: Colors.white,
+          value: scrollTypeRunner,
+          onChanged: (val) {
+            setState(() {
+              scrollTypeRunner = !scrollTypeRunner;
+            });
           },
-        ),
-        // child: Container(
-        //   height: 300,
-        //   decoration: BoxDecoration(
-        //     border: Border.all(width: 1),
-        //     color: Colors.black38,
-        //   ),
-        //   child: Center(
-        //     child: Text(
-        //       'item',
-        //       style: TextStyle(fontSize: 20),
-        //     ),
-        //   ),
-        // ),
+        )
+      ],
+    );
+    return Scaffold(
+      appBar: appBar,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Pesquisar',
+                  suffixIcon: Icon(Icons.search)),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              physics: !scrollTypeRunner ? PageScrollPhysics() : null,
+              controller: controller,
+              itemCount: 50,
+              itemBuilder: (BuildContext context, int index) {
+                return ItemExemplo(heightItem);
+              },
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_upward_rounded),
-        onPressed: () {
-          controller.animateTo(
-            0,
-            duration: Duration(seconds: 1),
-            curve: Curves.easeIn,
-          );
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   mini: true,
+      //   child: Icon(Icons.arrow_upward_rounded),
+      //   onPressed: () {
+      //     controller.animateTo(
+      //       0,
+      //       duration: Duration(seconds: 1),
+      //       curve: Curves.easeIn,
+      //     );
+      //   },
+      // ),
     );
   }
 }
